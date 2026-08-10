@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LEGO Buyer — least-cost BrickLink basket</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>LEGO Buyer</h1>
+  <p class="sub">Find the cheapest way to buy a pile of missing pieces across BrickLink stores &mdash; accounting for shipping and store minimums, not just sticker price.</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2>1. Add the pieces you need</h2>
+    <form id="add-form" class="add-row" autocomplete="off">
+      <label>Part number
+        <input id="in-part" placeholder="3001 or element 300121" required>
+        <span class="hint">BrickLink part no., or a LEGO.com element ID</span>
+      </label>
+      <label>Quantity
+        <input id="in-qty" type="number" min="1" value="1" required>
+      </label>
+      <label>Color <span class="opt">optional</span>
+        <input id="in-color" list="colors" placeholder="Any color">
+        <span class="hint">Blank = any color considered</span>
+      </label>
+      <button type="submit" class="primary">Add</button>
+    </form>
+    <datalist id="colors"></datalist>
+
+    <table id="basket" class="hidden">
+      <thead><tr><th>Part</th><th>Color</th><th class="num">Qty</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p id="basket-empty" class="empty">No pieces added yet.</p>
+  </section>
+
+  <section class="card">
+    <h2>2. Filters <span class="opt">optional</span></h2>
+    <div class="filters">
+      <label>Condition
+        <select id="f-cond">
+          <option value="N" selected>New only</option>
+          <option value="U">Used only</option>
+          <option value="A">Any</option>
+        </select>
+      </label>
+      <label>Min. seller feedback
+        <input id="f-feedback" type="number" min="0" value="100">
+      </label>
+      <label>Only these countries
+        <input id="f-only" placeholder="US">
+        <span class="hint">Comma separated. Blank = worldwide</span>
+      </label>
+      <label>Exclude countries
+        <input id="f-exclude" placeholder="CN, HK">
+      </label>
+      <label>Max stores
+        <input id="f-maxstores" type="number" min="1" placeholder="no limit">
+      </label>
+      <label>Runner-up plans
+        <input id="f-runners" type="number" min="0" max="10" value="3">
+      </label>
+    </div>
+    <button id="submit" class="primary big">Find cheapest basket</button>
+    <p class="hint slow">Each new part costs a live BrickLink request, so the first run takes a few seconds. Results cache for 6 hours.</p>
+  </section>
+
+  <div id="status"></div>
+  <div id="results"></div>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

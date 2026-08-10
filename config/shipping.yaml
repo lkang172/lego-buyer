@@ -1,0 +1,39 @@
+# Shipping cost + delivery estimates for a buyer in Maryland, USA.
+#
+# BrickLink sellers publish shipping terms as free-form text on their own store
+# pages, so there is no way to fetch real numbers. Everything here is an
+# ESTIMATE and is labelled as such in the UI.
+#
+# `store_overrides` wins over `countries`, which wins over `default`. Once you
+# actually order from a store you know its real cost -- pin it here and every
+# future run gets that much more accurate.
+
+default:
+  base: 16.00        # flat cost in USD for a small parts order
+  per_lot: 0.00      # added per distinct lot in the order
+  days: [12, 30]
+
+countries:
+  US: { base: 5.00,  per_lot: 0.05, days: [3, 7] }
+  CA: { base: 13.00, per_lot: 0.05, days: [7, 16] }
+  GB: { base: 14.00, per_lot: 0.05, days: [8, 18] }
+  DE: { base: 14.00, per_lot: 0.05, days: [8, 18] }
+  NL: { base: 14.00, per_lot: 0.05, days: [8, 18] }
+  BE: { base: 14.00, per_lot: 0.05, days: [8, 18] }
+  FR: { base: 15.00, per_lot: 0.05, days: [8, 20] }
+  ES: { base: 15.00, per_lot: 0.05, days: [9, 20] }
+  IT: { base: 15.00, per_lot: 0.05, days: [9, 22] }
+  PL: { base: 14.00, per_lot: 0.05, days: [9, 20] }
+  CZ: { base: 14.00, per_lot: 0.05, days: [9, 20] }
+  DK: { base: 14.00, per_lot: 0.05, days: [8, 18] }
+  SE: { base: 15.00, per_lot: 0.05, days: [9, 20] }
+  AU: { base: 18.00, per_lot: 0.05, days: [12, 28] }
+  NZ: { base: 19.00, per_lot: 0.05, days: [14, 30] }
+  JP: { base: 17.00, per_lot: 0.05, days: [10, 22] }
+  CN: { base: 12.00, per_lot: 0.05, days: [14, 35] }
+  HK: { base: 12.00, per_lot: 0.05, days: [14, 35] }
+
+# Pin exact known costs here, keyed by BrickLink seller username:
+#   store_overrides:
+#     SomeSeller: { base: 4.25, per_lot: 0.0, days: [2, 4] }
+store_overrides: {}
